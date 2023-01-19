@@ -78,3 +78,47 @@ SELECT AVG(salary) as avg, MAX(salary) as max,
        MIN(salary) as min, SUM(salary) as sum from Employees;
 
 -- 17
+SELECT * FROM Employees WHERE SUBSTRING(phone_number, 1, 1) = SUBSTRING(REVERSE(phone_number), 1, 1);
+
+-- 18
+SELECT COUNT(DISTINCT(job_id)) from Employees;
+
+-- 19
+SELECT SUM(salary), job_id FROM Employees GROUP BY job_id;
+
+-- 20
+SELECT AVG(salary), job_id FROM Employees GROUP BY job_id;
+
+-- 21
+SELECT MAX(salary) as max_salary, job_id FROM Employees  WHERE salary > 10000 GROUP BY job_id ORDER BY max_salary DESC;
+
+-- 22
+SELECT MAX(avg_salary) as max_salary
+FROM (SELECT job_id, AVG(salary) AS avg_salary
+      FROM Employees group by job_id) as maxSalary;
+
+-- 23
+SELECT CONCAT(full_name, ' earns ', salary, ' per month, but wants ', salary * 3) as [Dream Salaries] FROM Employees;
+
+-- 24
+SELECT full_name, LEN(full_name) from Employees;
+
+-- 25
+SELECT SUBSTRING(full_name, 1, CHARINDEX(' ', full_name)) as full_name from Employees;
+
+-- 26
+SELECT SUBSTRING(full_name, 1, 3) from Employees;
+
+-- 27
+SELECT REVERSE(full_name) FROM Employees;
+
+-- 28
+SELECT REPLACE(full_name, 'en', 'yu') from Employees;
+
+-- 29
+SELECT UPPER(full_name) from Employees;
+
+-- 30
+SELECT full_name, MIN(hire_dat) AS hire_dat, job_id from Employees
+                                                    GROUP BY job_id, full_name ORDER BY hire_dat;
+-- Not the hardest, but usually required query to find earliest employees in each job category
