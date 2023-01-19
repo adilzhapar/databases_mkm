@@ -32,7 +32,7 @@ SELECT employee_id, full_name, hire_dat, salary FROM Employees;
 SELECT employee_id, full_name, email, salary * 12 FROM Employees;
 
 -- 3
-    SELECT DISTINCT job_id from Employees;
+SELECT DISTINCT job_id from Employees;
 
 -- 4
 SELECT * FROM Employees WHERE job_id = 'IT_PROG' AND salary > 5000;
@@ -50,3 +50,31 @@ SELECT employee_id, full_name, salary * 12 from Employees where salary * 12 < 50
 SELECT employee_id, full_name, salary FROM Employees WHERE salary > 4000 AND salary < 7000;
 -- The difference with task 5 is that BETWEEN takes ranges inclusively while operators not
 
+-- 9
+SELECT employee_id, full_name, salary, job_id FROM Employees WHERE employee_id IN (144, 102, 200, 205);
+
+-- 10
+SELECT employee_id, full_name, salary, job_id FROM Employees WHERE employee_id NOT IN (144, 102, 200, 205);
+
+-- 11
+SELECT employee_id, full_name, salary from Employees WHERE full_name LIKE '% _a%';
+
+-- 12
+SELECT full_name FROM Employees WHERE full_name LIKE '__a%';
+
+-- 13
+SELECT employee_id, full_name, email, salary FROM Employees WHERE
+        email =  CONCAT(SUBSTRING(full_name, 1, 1),
+            UPPER(SUBSTRING(full_name, PATINDEX('% %', full_name) + 1, LEN(full_name) - PATINDEX('% %', full_name))));
+
+-- 14
+SELECT employee_id, full_name, email, salary from Employees ORDER BY salary, hire_dat DESC ;
+
+-- 15
+SELECT employee_id, full_name, salary FROM Employees ORDER BY employee_id DESC;
+
+-- 16
+SELECT AVG(salary) as avg, MAX(salary) as max,
+       MIN(salary) as min, SUM(salary) as sum from Employees;
+
+-- 17
