@@ -29,7 +29,7 @@ CREATE TABLE Job_grades (
 SELECT employee_id, full_name, hire_dat, salary FROM Employees;
 
 -- 2
-SELECT employee_id, full_name, email, salary * 12 FROM Employees;
+SELECT employee_id, full_name, email, salary * 12 as annual_salary FROM Employees;
 
 -- 3
 SELECT DISTINCT job_id from Employees;
@@ -44,7 +44,7 @@ SELECT employee_id, full_name, job_id FROM Employees WHERE salary BETWEEN 4000 A
 SELECT full_name, salary from Employees WHERE salary NOT BETWEEN 3000 AND 9000;
 
 -- 7
-SELECT employee_id, full_name, salary * 12 from Employees where salary * 12 < 50000;
+SELECT employee_id, full_name, salary * 12 as annual_salary from Employees where salary * 12 < 50000;
 
 -- 8
 SELECT employee_id, full_name, salary FROM Employees WHERE salary > 4000 AND salary < 7000;
@@ -81,13 +81,13 @@ SELECT AVG(salary) as avg, MAX(salary) as max,
 SELECT * FROM Employees WHERE SUBSTRING(phone_number, 1, 1) = SUBSTRING(REVERSE(phone_number), 1, 1);
 
 -- 18
-SELECT COUNT(DISTINCT(job_id)) from Employees;
+SELECT COUNT(DISTINCT(job_id)) as number_of_jobs from Employees;
 
 -- 19
-SELECT SUM(salary), job_id FROM Employees GROUP BY job_id;
+SELECT SUM(salary) as salary_sums, job_id FROM Employees GROUP BY job_id;
 
 -- 20
-SELECT AVG(salary), job_id FROM Employees GROUP BY job_id;
+SELECT AVG(salary) as salary_avg, job_id FROM Employees GROUP BY job_id;
 
 -- 21
 SELECT MAX(salary) as max_salary, job_id FROM Employees  WHERE salary > 10000 GROUP BY job_id ORDER BY max_salary DESC;
@@ -101,7 +101,7 @@ FROM (SELECT job_id, AVG(salary) AS avg_salary
 SELECT CONCAT(full_name, ' earns ', salary, ' per month, but wants ', salary * 3) as [Dream Salaries] FROM Employees;
 
 -- 24
-SELECT full_name, LEN(full_name) from Employees;
+SELECT full_name, LEN(full_name) as length from Employees;
 
 -- 25
 SELECT SUBSTRING(full_name, 1, CHARINDEX(' ', full_name)) as full_name from Employees;
