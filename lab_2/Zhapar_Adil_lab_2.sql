@@ -32,10 +32,14 @@ FROM Employees
 GROUP BY department_id) as Em);
 
 -- 6
-SELECT department_id, MIN(salary) as min_salary FROM Employees GROUP BY department_id HAVING MIN(salary) > (SELECT MIN(salary) from Employees where department_id = 50);
+SELECT department_id, MIN(salary) as min_salary
+FROM Employees
+GROUP BY department_id
+HAVING MIN(salary) > (SELECT MIN(salary) from Employees where department_id = 50);
 
 -- 7
-SELECT MAX(avg_salary) from (SELECT AVG(salary) as avg_salary FROM Employees GROUP BY department_id) as EM;
+SELECT MAX(avg_salary) from (SELECT AVG(salary) as avg_salary
+                             FROM Employees GROUP BY department_id) as EM;
 
 -- 8
 SELECT full_name, department_name
@@ -51,7 +55,8 @@ FROM Employees AS E JOIN Job_grades AS J ON E.salary BETWEEN J.lowest_sal AND J.
 
 -- 11
 SELECT E.full_name, E.job_id, D.department_name, E.hire_dat
-FROM Employees as E join Departments D on D.department_id = E.department_id where E.hire_dat between '1995-01-01' and '2021-02-01' and E.salary between 1000 and 9999;
+FROM Employees as E join Departments D on D.department_id = E.department_id
+where E.hire_dat between '1995-01-01' and '2021-02-01' and E.salary between 1000 and 9999;
 
 
 -- PART TWO
@@ -74,7 +79,9 @@ ON E.department_id = D.department_id
 JOIN Locations L on D.location_id = L.location_id;
 
 -- 13
-SELECT E.full_name, L.location_name, E.salary * 0.1 AS montly_pension_contribution, E.salary * 0.1 * 12 as annual_pension_contribution, E.salary * 0.9 * 0.1 as medical_contribution
+SELECT E.full_name, L.location_name, E.salary * 0.1
+    AS montly_pension_contribution, E.salary * 0.1 * 12 as annual_pension_contribution,
+                                    E.salary * 0.9 * 0.1 as medical_contribution
 FROM Employees AS E JOIN Departments AS D
 ON E.department_id = D.department_id
 JOIN Locations L on D.location_id = L.location_id;
@@ -88,7 +95,9 @@ GROUP BY L.location_name
 ORDER BY avg_salary DESC;
 
 -- 15
-SELECT * FROM Employees WHERE department_id = 50 AND employee_id != ALL(SELECT manager_id from Departments where department_id = 50);
+SELECT * FROM Employees WHERE department_id = 50
+                          AND employee_id != ALL(SELECT manager_id
+                        from Departments where department_id = 50);
 
 -- 16
 SELECT E.*
